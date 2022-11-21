@@ -5,10 +5,9 @@
 
 
 ##Imports 
-import pymongo
 from pymongo import MongoClient
 
-##Connecting to Ahmed's MongoDB
+##URL to connect to Ahmed's MongoDB
 url = 'mongodb+srv://abushra:admin@cluster0.fgnygzs.mongodb.net/pytech?retryWrites=true&w=majority'
 
 ##Connecting to cluster
@@ -17,9 +16,11 @@ client = MongoClient(url)
 ##Pytech connection
 db = client.pytech
 
+collections = db.list_collection_names()
+
 ##Output list of collections
 print("\n-- Pytech COllection List --")
-print(db.list_collection_names)
+print(collections)
 
 ##Program end notification
-input ("End of program, please press any key to exit...")
+input ("\nEnd of program, please press any key to exit...")
