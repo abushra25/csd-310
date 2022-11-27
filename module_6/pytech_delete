@@ -1,0 +1,60 @@
+##Pytech_delete - Module 6 Assignment 6.3
+##Created by Ahmed Bushra
+##CYBR410-304J Data/Database Security 
+
+##Imports
+import pymongo
+from pymongo import MongoClient
+
+##URL variable for MongoDB connection
+url = "mongodb+srv://abushra:admin@cluster0.fgnygzs.mongodb.net/pytech?retryWrites=true&w=majority"
+
+##Connections to DB and Pytech & Students collections
+client = MongoClient(url)
+db = client.pytech
+students = db.students
+
+##Using Students collection to pull data
+docs = students.find({})
+
+##Output header message if current student documents
+print("\n -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY --")
+
+## Output of current documents in collection
+for doc in docs:
+    print("Student ID: " + doc["Student_ID"] + "\nFirst Name: " + doc["First_Name"] + "\nLast Name: " + doc["Last_Name"] + "\n")
+
+##Student test data build 
+Test_Doc = {
+    "Student_ID": "1010",
+    "First_Name": "John",
+    "Last_Name": "Doe",}
+
+##Insert statements + outputs. Stringing insert ID for output
+print("\n  -- INSERT STATEMENTS --")
+Test_Doc_Student_ID = students.insert_one(Test_Doc).inserted_id
+print("Inserted student record John Doe into the students collection with document_id" + str(Test_Doc_Student_ID))
+
+##find_one method to pull 1010 record
+Test_Doc = students.find_one({"Student_ID": "1010"})
+
+##Output message for displaying 1007 document + output of updated record 
+print("\n  -- DISPLAYING STUDENT TEST DOC --")
+
+print("Student ID: " + Test_Doc["Student_ID"] + "\nFirst Name: " + Test_Doc["First_Name"] + "\nLast Name: " + Test_Doc["Last_Name"] + "\n")
+
+# Calling delete_one to remove new student 1010 entry
+Deleted_Test_Doc = students.delete_one({"Student_ID": "1010"})
+
+# find all students in the collection 
+Updated_docs = students.find({})
+
+# display message 
+print("\n  -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY --")
+
+## Output of current documents in collection
+for doc in Updated_docs:
+    print("Student ID: " + doc["Student_ID"] + "\nFirst Name: " + doc["First_Name"] + "\nLast Name: " + doc["Last_Name"] + "\n")
+
+##End of program message 
+input("\n\n  End of program, press any key to continue...")
