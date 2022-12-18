@@ -37,7 +37,7 @@ try:
 
     ##Fulfilling iteration over cursor to display results
     for player in players:
-        print(" Player ID: {}\n First Name: {}\n Last Name: {}\n Team ID: {}\n".format(player[0], player[1], player[2], player[3]))
+        print(" Player ID: {}\n First Name: {}\n Last Name: {}\n Team Name: {}\n".format(player[0], player[1], player[2], player[3]))
 
 finally:
     """Closing try block"""
